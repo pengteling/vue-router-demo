@@ -7,8 +7,7 @@ const config = {
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    libraryTarget: "umd"
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
@@ -42,7 +41,10 @@ const config = {
     ]
   },
   plugins: [
-    
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+      filename: 'index.html'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: isDev ? '"development"' : '"production"'
@@ -60,11 +62,7 @@ if (isDev) {
   }
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'index.html',
-      filename: 'index.html'
-    })
+    new webpack.NoEmitOnErrorsPlugin()
   )
   config.module.rules.push(
     {
@@ -96,10 +94,11 @@ if (isDev) {
 }
 else {
   /* 生产模式 */
-  config.entry = path.resolve(__dirname, 'src/Mplayer.vue')
-    //vendor: ['vue']
-  
-  config.output.filename = 'Mplayer.js'
+  config.entry = {
+    app : path.resolve(__dirname, 'src/index.js'),
+    vendor: ['vue']
+  }
+  config.output.filename = '[name]-[chunkhash:8].js'
   config.module.rules.push(
     {
       test: /\.scss$/,
@@ -135,12 +134,12 @@ else {
   )
   config.plugins.push(
     new ExtractTextWebpackPlugin('style.[contentHash:8].css'),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor'
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'runtime'
-    // })
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime'
+    })
   )
 
 
