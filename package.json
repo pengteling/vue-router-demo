@@ -1,5 +1,5 @@
 {
-  "name": "vue-router",
+  "name": "vue-router-demo",
   "version": "1.0.9",
   "description": "",
   "main": "dist/Mplayer.js",
@@ -44,6 +44,7 @@
     "popper.js": "^1.14.3",
     "swiper": "^4.2.2",
     "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
     "vue-simple-mplayer2": "^1.0.9"
   }
 }
