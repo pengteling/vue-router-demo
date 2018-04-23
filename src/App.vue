@@ -9,7 +9,10 @@
       <router-link :to="{ name: 'user', params: { userid: 123 }}">user 123</router-link>
     </div>
     <router-view name="header"></router-view>
-    <router-view></router-view>
+    <transition name="slide-fade">
+      <router-view></router-view>
+    </transition>
+    
     <router-view name="footer"></router-view>
   </div>
 </template>
@@ -27,3 +30,15 @@ export default{
   }
 }
 </script>
+<style>
+.slide-fade-enter-active{
+  transition: all .3s ease;
+}
+.slide-fade-leave-active{
+  transition: all .3s cubic-bezier(1, 0.5, 0.8, 1)
+}
+.slide-fade-enter, .slide-fade-leave-active{
+  transform: translateX(-430px);
+  opacity: 0;
+}
+</style>

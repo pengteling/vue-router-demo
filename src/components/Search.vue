@@ -10,7 +10,12 @@
 </template>
 <script>
 export default {
-  props:['sokey','sokey2']
+  props:['sokey','sokey2'],
+  beforeRouteEnter: (to, from, next) => {
+    // ...
+    console.log("beforeRouteEnter")
+    next()
+  }
   
 }
 </script>

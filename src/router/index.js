@@ -10,7 +10,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import About from '@/components/About'
-import User from '@/components/User'
+const User = ()=> import('@/components/User')  //懒加载
+// import User from '@/components/User'
 import Me from '@/components/Me'
 import Category from '@/components/Category'
 import Header from '@/components/Header'
@@ -61,7 +62,11 @@ export default new Router({
       // path: '/user/:userid/photo/:photid',
       name: 'user',
       path: '/user/:userid',
-      component: User
+      component: User,
+      beforeEnter:(to,from,next)=>{
+        console.log("beforeEnter")
+        next()
+      }
     },
     {
       name: 'views',
@@ -96,6 +101,18 @@ export default new Router({
           sokey2: router.query.sokey2
         }
         
+      },   
+      beforeEnter:(to,from,next)=>{
+        console.log("beforeEnter")
+        next()
+      },
+      beforeRouteLeave (to, from, next) {
+        // 导航离开该组件的对应路由时调用
+        // 可以访问组件实例 `this`
+        
+        console.log("beforeRouteLeave")
+        //alert("beforeRouteLeave")
+        next()
       }
     }
   ]
