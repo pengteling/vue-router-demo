@@ -1,5 +1,5 @@
 <template>
   <div>
-    Category
+    列表页
   </div>
 </template>

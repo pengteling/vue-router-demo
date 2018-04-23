@@ -8,112 +8,26 @@ mode: hash  (#)
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import About from '@/components/About'
-const User = ()=> import('@/components/User')  //懒加载
-// import User from '@/components/User'
-import Me from '@/components/Me'
-import Category from '@/components/Category'
-import Header from '@/components/Header'
+import Main from '@/components/Main'
 import Footer from '@/components/Footer'
-import View from '@/components/View'
-import Search from '@/components/Search'
+import Category from '@/components/Category'
+import Home from '@/components/Home'
 Vue.use(Router)
-// const routes = [
-//   {
-//     path: '/',
-//     component: Home
-//   },
-//   {
-//     path: '/about',
-//     component: About
-//   }
-// ]
+
 export default new Router({
   mode:'history',
   routes:[
     {
-      // name: 'home',
-      path: '/',
-      component: Home,
-      children:[
-        {
-          path:'', component:Me ,name:'me'
-        },
-        {
-          path: 'me', component:Me ,name:'me2'
-        },
-        {
-          path: 'category', component: Category,name:'category'
-        }
-      ]
-    },
-    {
-      path: '/about',
-      component: About,
-      name:'about',
-      children:[
-        {
-          name :'tel',path: 'tel' ,component:{ render :h=>h("div","tel:021-1223456")}
-        }
-      ]
-    },
-    {
-      // path: '/user/:userid/photo/:photid',
-      name: 'user',
-      path: '/user/:userid',
-      component: User,
-      beforeEnter:(to,from,next)=>{
-        console.log("beforeEnter")
-        next()
-      }
-    },
-    {
-      name: 'views',
-      path: '/views',
-      components: {
-        default: View,
-        header: Header,
+      path: "/",
+      components:{
+        default: Main,
         footer: Footer
-      }
-      // component: View
-    },
-    // {
-    //   path:'/a',
-    //   redirect:'/b'
-    // }
-    {
-      path: '/a',
-      component:Me,
-      alias: ['/b','/d/c']
-    },
-    {
-      name: 'search',
-      path: '/search/:sokey',
-      component: Search,
-      // props: true
-      // props:{
-      //   sokey3 : 'vuex'
-      // }
-      props:(router)=>{
-        return {
-          sokey: router.params.sokey,
-          sokey2: router.query.sokey2
-        }
-        
-      },   
-      beforeEnter:(to,from,next)=>{
-        console.log("beforeEnter")
-        next()
       },
-      beforeRouteLeave (to, from, next) {
-        // 导航离开该组件的对应路由时调用
-        // 可以访问组件实例 `this`
-        
-        console.log("beforeRouteLeave")
-        //alert("beforeRouteLeave")
-        next()
-      }
-    }
+      children:[
+        {name:'Home', path:'',component:Home},
+        { name: 'Category', path: 'category', component: Category}
+      ]
+    },
+    
   ]
 })
