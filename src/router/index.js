@@ -13,6 +13,10 @@ import About from '@/components/About'
 import User from '@/components/User'
 import Me from '@/components/Me'
 import Category from '@/components/Category'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import View from '@/components/View'
+import Search from '@/components/Search'
 Vue.use(Router)
 // const routes = [
 //   {
@@ -58,6 +62,41 @@ export default new Router({
       name: 'user',
       path: '/user/:userid',
       component: User
+    },
+    {
+      name: 'views',
+      path: '/views',
+      components: {
+        default: View,
+        header: Header,
+        footer: Footer
+      }
+      // component: View
+    },
+    // {
+    //   path:'/a',
+    //   redirect:'/b'
+    // }
+    {
+      path: '/a',
+      component:Me,
+      alias: ['/b','/d/c']
+    },
+    {
+      name: 'search',
+      path: '/search/:sokey',
+      component: Search,
+      // props: true
+      // props:{
+      //   sokey3 : 'vuex'
+      // }
+      props:(router)=>{
+        return {
+          sokey: router.params.sokey,
+          sokey2: router.query.sokey2
+        }
+        
+      }
     }
   ]
 })

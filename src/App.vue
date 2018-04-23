@@ -8,7 +8,9 @@
       <router-link to="/user/30">user 30</router-link>
       <router-link :to="{ name: 'user', params: { userid: 123 }}">user 123</router-link>
     </div>
+    <router-view name="header"></router-view>
     <router-view></router-view>
+    <router-view name="footer"></router-view>
   </div>
 </template>
 <script>
