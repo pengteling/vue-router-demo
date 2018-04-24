@@ -6,8 +6,8 @@ import router from './router'
 //k+1
 
 router.beforeEach((to,from,next)=>{
-  console.log(to)
-  console.log(from)
+  // console.log(to)
+  // console.log(from)
   console.log("beforeEach")
   next()
 })

@@ -1,14 +1,12 @@
 <template>
   <div>
-    <h2>
-      首页
-    </h2>
-    <nav>
-      <router-link to="/phone">手机</router-link>
-      <router-link to="/computer">电脑</router-link>
-      <router-link to="/tv">电视</router-link>
-    </nav>
-    <router-view></router-view>
+    <h3>
+      Me
+    </h3>
+    <p>
+      
+      <router-link to="/mpointsmall">会员中心</router-link>
+    </p>
   </div>
 </template>
 <script>

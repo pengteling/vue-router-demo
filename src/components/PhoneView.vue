@@ -1,14 +1,6 @@
 <template>
   <div>
-    <h2>
-      首页
-    </h2>
-    <nav>
-      <router-link to="/phone">手机</router-link>
-      <router-link to="/computer">电脑</router-link>
-      <router-link to="/tv">电视</router-link>
-    </nav>
-    <router-view></router-view>
+    {{ this.$route.params }}
   </div>
 </template>
 <script>
@@ -22,7 +14,10 @@ export default {
     // ...
     console.log("beforeRouteLeave")
     next()
+  },
+  beforeRouteUpdate: (to,from,next) =>{
+    console.log("beforeRouteUpdate")
+    next()
   }
 }
 </script>
-
